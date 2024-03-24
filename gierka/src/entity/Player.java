@@ -57,14 +57,14 @@ public class Player extends Entity{
 
         // Staty gracza
         level = 1;
-        maxLife = 500;
+        maxLife = 25;
         life = maxLife;
         maxMana = 5;
         mana = maxMana;
-        strength = 10;
-        dexterity = 10;
-        inteligence = 10;
-        endurance = 10;
+        strength = 4;
+        dexterity = 4;
+        inteligence = 3;
+        endurance = 1;
         exp = 0;
         nextLevelExp = 10;
         statPoints = 2;

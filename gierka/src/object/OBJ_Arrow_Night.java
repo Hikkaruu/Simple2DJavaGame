@@ -17,8 +17,8 @@ public class OBJ_Arrow_Night extends Projectile {
         name = "Night Arrow";
         type = type_arrow;
         ammoType = ammoTypeNightArrow;
-        speed = 14;
-        maxLife = 50;
+        speed = 8;
+        maxLife = 150;
         life = maxLife;
         attackValue = 4;
         useCost = 1;

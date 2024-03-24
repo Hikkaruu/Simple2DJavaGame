@@ -17,8 +17,8 @@ public class OBJ_Arrow_Normal extends Projectile {
         name = "Normal Arrow";
         type = type_arrow;
         ammoType = ammoTypeNormalArrow;
-        speed = 12;
-        maxLife = 40;
+        speed = 7;
+        maxLife = 280;
         life = maxLife;
         attackValue = 2;
         useCost = 1;
