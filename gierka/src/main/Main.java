@@ -15,12 +15,11 @@ public class Main {
         gamePanel.config.loadConfig();
 
         window.pack();
+        gamePanel.playMusic(0);
 
         window.setLocationRelativeTo(null);
         window.setVisible(true);
         gamePanel.setupGame();
         gamePanel.startGameThread();
-
-
     }
 }

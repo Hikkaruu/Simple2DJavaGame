@@ -15,7 +15,7 @@ public class Sound {
     float volume;
 
     public Sound() {
-        soundURL[0] = getClass().getResource("/sound/coin.wav");
+        soundURL[0] = getClass().getResource("/sound/background.wav");
         soundURL[1] = getClass().getResource("/sound/coin.wav");
         soundURL[2] = getClass().getResource("/sound/powerup.wav");
         soundURL[3] = getClass().getResource("/sound/unlock.wav");
@@ -30,6 +30,7 @@ public class Sound {
         soundURL[12] = getClass().getResource("/sound/arrow_shot.wav");
         soundURL[13] = getClass().getResource("/sound/cuttree.wav");
         soundURL[14] = getClass().getResource("/sound/gameover.wav");
+        soundURL[15] = getClass().getResource("/sound/stairs.wav");
         soundURL[15] = getClass().getResource("/sound/stairs.wav");
     }
 
@@ -53,7 +54,6 @@ public class Sound {
     public void loop(){
 
         clip.loop(Clip.LOOP_CONTINUOUSLY);
-
     }
     public void stop(){
 
@@ -69,6 +69,11 @@ public class Sound {
             case 4: volume = 1f; break;
             case 5: volume = 6f; break;
         }
-        fc.setValue(volume);
+        try {
+            fc.setValue(volume);
+        }
+        catch (Exception e){
+            System.out.println("Error: " + e);
+        }
     }
 }

@@ -1,8 +1,5 @@
 package main;
-
-import javax.imageio.ImageIO;
 import java.io.*;
-import java.util.Objects;
 
 public class Config {
 
@@ -13,29 +10,23 @@ public class Config {
     }
 
     public void saveConfig() {
+        String userHome = System.getProperty("user.home");
+        File configDir = new File(userHome, ".twoja_gierka");
+        if (!configDir.exists()) {
+            configDir.mkdirs();
+        }
 
-        try {
-            File file = new File("../projekt/gierka/res/config.txt");
-            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+        File configFile = new File(configDir, "config.txt");
 
-            // Game info
-            if (gp.keyH.showGameInfo == true) {
-                bw.write("On");
-            }
-            if (gp.keyH.showGameInfo == false) {
-                bw.write("Off");
-            }
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(configFile))) {
+            bw.write(gp.keyH.showGameInfo ? "On" : "Off");
             bw.newLine();
 
-            // Głośność muzyki
             bw.write(String.valueOf(gp.music.volumeScale));
             bw.newLine();
 
-            // Głośność dźwięków
             bw.write(String.valueOf(gp.se.volumeScale));
             bw.newLine();
-
-            bw.close();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,33 +34,48 @@ public class Config {
     }
 
     public void loadConfig() {
+        String userHome = System.getProperty("user.home");
+        File userConfig = new File(userHome, ".twoja_gierka/config.txt");
 
-        try {
-            File file = new File("../projekt/gierka/res/config.txt");
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            String s = br.readLine();
-
-            // Game info
-            if (s.equals("On")) {
-                gp.keyH.showGameInfo = true;
+        if (userConfig.exists()) {
+            try (BufferedReader br = new BufferedReader(new FileReader(userConfig))) {
+                loadFromReader(br);
+                return;
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            if (s.equals("Off")) {
-                gp.keyH.showGameInfo = false;
-            }
+        }
 
-            // Głośność muzyki
-            s = br.readLine();
-            gp.music.volumeScale = Integer.parseInt(s);
-
-            // Głośność dźwięków
-            s = br.readLine();
-            gp.se.volumeScale = Integer.parseInt(s);
-
-            br.close();
-
+        try (InputStream is = getClass().getResourceAsStream("/config/default_config.txt");
+             BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+            loadFromReader(br);
         } catch (Exception e) {
             e.printStackTrace();
+            setDefaultConfig();
         }
+    }
+
+    private void loadFromReader(BufferedReader br) throws IOException {
+        String s = br.readLine();
+        if (s != null) {
+            gp.keyH.showGameInfo = s.equals("On");
+        }
+
+        s = br.readLine();
+        if (s != null) {
+            gp.music.volumeScale = Integer.parseInt(s);
+        }
+
+        s = br.readLine();
+        if (s != null) {
+            gp.se.volumeScale = Integer.parseInt(s);
+        }
+    }
+
+    private void setDefaultConfig() {
+        gp.keyH.showGameInfo = true;
+        gp.music.volumeScale = 2;
+        gp.se.volumeScale = 2;
     }
 
 }

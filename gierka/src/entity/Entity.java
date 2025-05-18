@@ -538,12 +538,13 @@ public class Entity {
         BufferedImage image = null;
 
         try {
-            image = ImageIO.read(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(imagePath + ".png")));
+            System.out.println("loading: /"+ imagePath + ".png");
+            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/" + imagePath + ".png")));
             image = uTool.scaleImage(image, width, height);
-
         }catch (IOException e){
             e.printStackTrace();
         }
+
         return image;
     }
 

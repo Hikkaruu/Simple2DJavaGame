@@ -270,7 +270,6 @@ public class TileManager {
             int screenX = worldX - gp.player.worldX + gp.player.screenX;
             int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-
             // renderowanie mapy tylko w zasiegu postaci + 1 "kratka" w każdą stronę, by nie marnować zasobów.
             if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
                     worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
