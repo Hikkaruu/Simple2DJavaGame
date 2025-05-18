@@ -1,5 +1,8 @@
 # Simple 2D RPG Java Game
 
+## System Requirements
+![Java Version](https://img.shields.io/badge/Java-19%2B-orange?logo=openjdk)
+
 ## Main Screen
 Menu created with Graphics2D Library
 ![ss1](https://github.com/Hikkaruu/Simple2DJavaGame/blob/main/screens/1.png)
